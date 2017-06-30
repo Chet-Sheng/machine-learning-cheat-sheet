@@ -16,20 +16,18 @@ It is known as 'fully connected'/ 'dense' layers
 
 
 	\includegraphics[width=0.4\textwidth]{figures/linear02}
-	
-
-
 
 \subsection{Sigmoid Layer}
 Sigmoid layer can be used as binary-class classifier with 2-way gating.\\
-\textbf{Activation function:}
+\textbf{Activation function:} \footnote{For more activation functions see:\\ {\small\url{https://en.wikipedia.org/wiki/Activation_function}}}
 
 \begin{align}
 	\sigma(x)=\frac{1}{1+ e^{-x}} = \frac{e^x}{1+e^{x}}
 \end{align}
 
+\vspace{-10pt}
 \begin{center}
-	\includegraphics[width=0.45\textwidth]{figures/Sigmoid}
+	\includegraphics[width=0.4\textwidth]{figures/Sigmoid}
 \end{center}
 
 
@@ -46,6 +44,15 @@ The logistic sigmoid function $\sigma_\beta=1/1+e^{-\beta x} $. The parameter $ 
 	\includegraphics[width=0.55\textwidth]{figures/sigmoid02}
 \end{center} 
 
+\textbf{*An alternative activation function is $ \textbf{tanh(x)} $ function:}\\
+\vspace{5 pt}
+Where $ tanh(x=)f(z) $ here:
+\begin{align}
+tanh(x)=\frac{e^x-e^{-x}}{e^x+e^{-x}}
+\end{align}
+\vspace{10pt}
+\includegraphics[width=0.55\textwidth]{figures/tanh}
+
 \subsection{Softmax Layer}
 Softmax layer can be used as multi-class classification and also in soft/differentiably multi-way gating/routing.
 
@@ -55,7 +62,7 @@ Softmax layer can be used as multi-class classification and also in soft/differe
 \end{flalign}
 
 
-\textbf{LinearLayer+SoftmaxLayer as a \underline{multi-class classifier}:}\\
+\textbf{LinearLayer + SoftmaxLayer as a \underline{multi-class classifier}:}\\
 
 \vspace{-10pt}
 
@@ -74,9 +81,6 @@ ReLU is simpler/ cheaper than sigmoid, and it is prevalent in modern neural nets
 \begin{center}
 		\includegraphics[width=0.35\textwidth]{figures/ReLU}
 \end{center}
-
-
-
 
 
 
