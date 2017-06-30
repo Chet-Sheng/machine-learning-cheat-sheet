@@ -48,6 +48,21 @@ footskip=5mm
 % choose options for [] as required from the list
 % in the Reference Guide
 
+%==========================================
+% Adding Parts
+
+\usepackage{tocloft}
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+\newlength\mylen
+\renewcommand\thepart{\arabic{part}}
+\renewcommand\cftpartpresnum{Part~}
+\settowidth\mylen{\bfseries\cftpartpresnum\cftpartaftersnum}
+\addtolength\cftpartnumwidth{\mylen}
+
+%==========================================
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % graybox example
 %\begin{svgraybox}...\end{svgraybox
@@ -121,7 +136,7 @@ citecolor=blue
 	
 	\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
-	\include{titlepage}
+%	\include{titlepage}
 	%\include{dedic}
 	%\include{foreword}
 	\include{preface}
@@ -133,7 +148,7 @@ citecolor=blue
 	
 	
 	\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%\include{part}
+	\part{Supervised Learning and Unsupervised Learning}
 	\include{chapterIntroduction}
 	\include{chapterProbability}
 	\include{chapterGenerativeModels}
@@ -161,12 +176,13 @@ citecolor=blue
 	\include{chapterClustering}
 	\include{chapterStructureLearning}
 	\include{chapterLVM}
+	\part{Deep Learning}
 	\include{chapterDeepLearning}
+	\include{chapterOptimization}
 	%
 	
 	\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\appendix
-	\include{chapterOptimization}
 	\include{glossary}
 	\printindex
 	
