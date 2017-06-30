@@ -1,0 +1,176 @@
+%%%%%%%%%%%%%%%%%%%% book.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample root file for the chapters of your "monograph"
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% RECOMMENDED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[graybox, envcountchap, twocolumn]{styles02/svmono}
+\documentclass[norunningheads, graybox, envcountchap]{styles02/svmono}
+\usepackage[a4paper, 
+left=20mm,
+right=20mm,
+top=20mm,
+bottom=20mm,
+%headheight=50mm
+footskip=5mm
+]{geometry}
+
+%\usepackage{bookmark}
+% set indent to be 0
+\setlength{\parindent}{0pt}
+%==========================================
+% chapter title formating
+\usepackage{titlesec}
+%\titlespacing{\chapter}{0pt}{550pt}{10pt}{}
+\titleformat{\chapter}[display]
+{\normalfont\Huge \scshape}{\titlerule}{-28pt}{\thechapter\ \ \Huge}[\vspace{-2pt}\titlerule]
+\titleformat{name=\chapter,numberless}[display]
+{\normalfont\Huge \scshape}{\titlerule}{-28pt}{\Huge}[\vspace{-2pt}\titlerule]
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+
+%==========================================
+% head and foot formating
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhf{}
+\setlength\headheight{15pt} 
+%\fancyfoot[R]{\thepage}
+%==========================================
+
+%\textwidth of 117 mm or 27-3/4 pi pi 
+%a \textheight of 191 mm or 45-1/6 pi 
+%a \headsep of 12 pt (space between the running head and text).
+
+% choose options for [] as required from the list
+% in the Reference Guide
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% graybox example
+%\begin{svgraybox}...\end{svgraybox
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+\usepackage{type1cm}         
+
+\usepackage{makeidx}         % allows index generation
+\usepackage{graphicx}        % standard LaTeX graphics tool
+% when including figure files
+\usepackage{multicol}        % used for the two-column index
+\usepackage[bottom]{footmisc}% places footnotes at page bottom
+
+% see the list of further useful packages
+% in the Reference Guide
+
+% please use the style svind.ist with
+% your makeindex program
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amssymb,amsmath,bm}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+\usepackage{textcomp}
+\newcommand\abs[1]{\left\lvert#1\right\rvert}
+\usepackage{longtable}
+\usepackage{algorithm2e}
+\usepackage{tocbibind}
+\usepackage[toc]{multitoc}
+\renewcommand{\bibname}{References}
+
+%%----------------------------------------------------------------------------
+\usepackage{mathptmx}        % selects Times Roman as basic font
+\usepackage{helvet}          % selects Helvetica as sans-serif font
+\usepackage{courier}         % selects Courier as typewriter font
+%\usepackage{type1cm}        % activate if the above 3 fonts are 
+% not available on your system
+
+% when including figure files
+\usepackage[justification=centering]{caption}
+\usepackage{subfig}
+\usepackage{multirow}
+\usepackage[
+bookmarksnumbered=true,
+bookmarksopen=true,
+%bookmarks=true
+colorlinks=true,
+linkcolor=blue,
+anchorcolor=blue,
+citecolor=blue
+]{hyperref}
+
+\graphicspath{{figures/}}
+
+% see the list of further useful packages in the Reference Guide
+
+\makeindex             % used for the subject index
+% please use the style svind.ist with
+% your makeindex program
+
+\begin{document}
+	
+%	\author{soulmachine@gmail.com}
+%	\title{Machine Learning Cheat Sheet}
+%	\subtitle{Classical equations, diagrams and tricks in machine learning}
+	\author{Huafeng Sheng}
+	\title{Machine Learning Notebook}
+	\subtitle{-- Personalized Edition}
+	\maketitle
+	
+	\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\include{titlepage}
+	%\include{dedic}
+	%\include{foreword}
+	\include{preface}
+	%\include{acknow}
+	
+	\tableofcontents
+	%\include{acronym}
+	\include{notation}
+	
+	
+	\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%\include{part}
+	\include{chapterIntroduction}
+	\include{chapterProbability}
+	\include{chapterGenerativeModels}
+	\include{chapterMVN}
+	\include{chapterBayesianStatistics}
+	\include{chapterFrequentistStatistics}
+	\include{chapterLinearRegression}
+	\include{chapterLogisticRegression}
+	\include{chapterGLM}
+	\include{chapterDGM}
+	\include{chapterEM}
+	\include{chapterLatentLinearModels}
+	\include{chapterSparseLinearModels}
+	\include{chapterKernels}
+	\include{chapterGP}
+	\include{chapterABM}
+	\include{chapterHMM}
+	\include{chapterSSM}
+	\include{chapterUGM}
+	\include{chapterExactInferenceForGraphicalModels}
+	\include{chapterVariationalInference}
+	\include{chapterMoreVariationalInference}
+	\include{chapterMonteCarloInference}
+	\include{chapterMCMC}
+	\include{chapterClustering}
+	\include{chapterStructureLearning}
+	\include{chapterLVM}
+	\include{chapterDeepLearning}
+	%
+	
+	\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\appendix
+	\include{chapterOptimization}
+	\include{glossary}
+	\printindex
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{document}
+
