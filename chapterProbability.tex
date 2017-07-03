@@ -664,27 +664,36 @@ Conversely, the distribution with minimum entropy (which is zero) is any \textbf
 
 
 \subsection{KL divergence}
-One way to measure the dissimilarity of two probability distributions, $p$ and $q$ , is known as the \textbf{Kullback-Leibler divergence}(\textbf{KL divergence})or \textbf{relative entropy}. This is defined as follows:
-\begin{equation}
-\mathbb{KL}(P||Q) \triangleq 
-\sum\limits_{x}{p(x)\log_2\dfrac{p(x)}{q(x)}}
-\end{equation}
-where the sum gets replaced by an integral for pdfs\footnote{The KL divergence is not a distance, since it is asymmetric. One symmetric version of the KL divergence is the \textbf{Jensen-Shannon divergence}, defined as $JS(p_1,p_2)=0.5\mathbb{KL}(p_1||q)+0.5\mathbb{KL}(p_2||q)$,where $q=0.5p_1+0.5p_2$}. The KL divergence is only defined if P and Q both sum to 1 and if $q(x)=0$ implies $p(x)=0$ for all $x$(absolute continuity). If the quantity  $0\ln0$ appears in the formula, it is interpreted as zero because $\lim\limits_{x \to 0}x\ln x$. We can rewrite this as
+One way to measure the `\textbf{difference}' of two probability distributions, $p$ and $q$ , is known as the \textbf{Kullback-Leibler divergence}(\textbf{KL divergence})or \textbf{relative entropy}: 
+%\newpage KL divergence is defined as follows:\\
+%\vspace{-15pt}
+\begin{flalign}
+%	&\mathbb{KL}(Q||P) &\equiv\langle \log q(x)-\log p(x) \rangle _{q(x)} \geq 0 &\\
+	\mathbb{KL}(Q||P) &\equiv\langle \log q(x)-\log p(x)\rangle _{q(x)} \geq 0 \\
+	&= \mathbb{E}_{q(x)} \big[\log q(x)-\log p(x) \big]\\
+	&= \sum \limits_{x}{q(x)\log\dfrac{q(x)}{p(x)}}
+\end{flalign}
+
+where the sum gets replaced by an integral for pdfs\footnote{The KL divergence is not a distance, since it is asymmetric. One symmetric version of the KL divergence is the \textbf{Jensen-Shannon divergence}, defined as $JS(p_1,p_2)=0.5\mathbb{KL}(p_1||q)+0.5\mathbb{KL}(p_2||q)$,where $q=0.5p_1+0.5p_2$}. The KL divergence is only defined if P and Q both sum to 1 and if $p(x)=0$ implies $q(x)=0$ for all $x$(absolute continuity). (If the quantity  $0\ln0$ appears in the formula, it is interpreted as zero because $\lim\limits_{x \to 0}x\ln x$.) We can rewrite this as
 \begin{equation}\begin{split}
-\mathbb{KL}(p||q) & \triangleq \sum\limits_{x}{p(x)\log_2p(x)}-\sum\limits_{k=1}^{K}{p(x)\log_2q(x)} \\
-    & =\mathbb{H}(p,q)-\mathbb{H}(p)
+\mathbb{KL}(p||q) & \triangleq \sum\limits_{x}{q(x)\log q(x)}-\sum\limits_{x}{q(x)\log p(x)} \\
+    & =\mathbb{H}(q, p)-\mathbb{H}(q)
 \end{split}\end{equation}
-where $\mathbb{H}(p,q)$ is called the \textbf{cross entropy},
+
+where $\mathbb{H}(q, p)$ is called the {\color{cyan}\textbf{cross entropy}},
 \begin{equation}\label{eqn:cross-entropy}
-\mathbb{H}(p,q)=-\sum\limits_{x}{p(x)\log_2q(x)}
+\mathbb{H}(q, p)=-\sum\limits_{x}{q(x)\log p(x)}
 \end{equation}
 
-One can show (Cover and Thomas 2006) that the cross entropy is the average number of bits needed to encode data coming from a source with distribution $p$ when we use model $q$ to define our codebook. Hence the “regular” entropy $\mathbb{H}(p)=\mathbb{H}(p,p)$, defined in section \S \ref{sec:Entropy},is the expected number of bits if we use the true model, so the KL divergence is the diference between these. In other words, the KL divergence is the average number of \emph{extra} bits needed to encode the data, due to the fact that we used distribution $q$ to encode the data instead of the true distribution $p$.
+One can show (Cover and Thomas 2006) that the cross entropy is the average number of bits needed to encode data coming from a source with distribution $q$ when we use model $p$ to define our codebook. Hence the “regular” entropy $\mathbb{H}(q)=\mathbb{H}(q,q)$, defined in section \S \ref{sec:Entropy},is the expected number of bits if we use the true model, so the KL divergence is the diference between these. In other words, the KL divergence is the average number of \emph{extra} bits needed to encode the data, due to the fact that we used distribution $p$ to encode the data instead of the true distribution $q$.
 
-The “extra number of bits” interpretation should make it clear that $\mathbb{KL}(p||q) \geq 0$, and that the KL is only equal to zero if $q = p$. We now give a proof of this important result.
+The “extra number of bits” interpretation should make it clear that $\mathbb{KL}(q||p) \geq 0$, and that the KL is only equal to zero if $q = p$. We now give a proof of this important result.
 
 \begin{theorem}
-(\textbf{Information inequality}) $\mathbb{KL}(p||q) \geq 0 \text{ with equality iff } p=q$.
+\textbf{Information inequality:} 
+\begin{center}
+$\mathbb{KL}(p||q) \geq 0 \text{ with equality iff } p=q$.
+\end{center}
 \end{theorem}
 
 One important consequence of this result is that \emph{the discrete distribution with the maximum

@@ -19,7 +19,7 @@
 %%   Right brace   \}     Tilde         \~}
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{svmono}[2009/12/17 v5.5
+\ProvidesClass{styles/svmono}[2009/12/17 v5.5
 ^^JSpringer Verlag global LaTeX document class for monographs]
 %
 % Options

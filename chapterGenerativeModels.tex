@@ -1,11 +1,13 @@
 \chapter{Generative models for discrete data}
 
 \section{Generative classifier}
-\begin{equation}\label{eqn:Generative-classifier}
-p(y=c|\vec{x},\vec{\theta})=\dfrac{p(y=c|\vec{\theta})p(\vec{x}|y=c,\vec{\theta})}{\sum_{c'}{p(y=c'|\vec{\theta})p(\vec{x}|y=c',\vec{\theta})}}
-\end{equation}
-
-This is called a \textbf{generative classifier}, since it specifies how to generate the data using the \textbf{class conditional density} $p(\vec{x}|y=c)$ and the class prior $p(y=c)$. An alternative approach is to directly fit the class posterior, $p(y=c|\vec{x})$ ;this is known as a \textbf{discriminative classifier}. 
+%\vspace{-20pt}
+%\begin{flalign}
+%	p(y=c|\vec{x},\vec{\theta}) &= \dfrac{p(y=c, \textbf{x}, \theta)/p(\theta)}{\sum_{c'}p( y=c', \textbf{x}, \theta)/p(\theta)}\\
+%	&=\dfrac{{\color{blue}p(y=c|\vec{\theta})p(\vec{x}|y=c,\vec{\theta})}}{\sum_{c'}{p(y=c'|\vec{\theta})p(\vec{x}|y=c',\vec{\theta})}}
+%\end{flalign}
+%
+%This is called a \textbf{generative classifier}, since it specifies {\color{blue} how to generate the data using the \textbf{class conditional density} $p(\vec{x}|y=c)$ and the class prior $p(y=c)$.} An alternative approach is to directly fit the class posterior, $p(y=c|\vec{x})$ ;this is known as a \textbf{discriminative classifier}. 
 
 
 \section{Bayesian concept learning}
@@ -232,7 +234,7 @@ where $\vec{\theta}_{-j}$ are all the components of \vec{\theta} except $\theta_
 The above expression avoids the zero-count problem. In fact, this form of Bayesian smoothing is even more important in the multinomial case than the binary case, since the likelihood of data sparsity increases once we start partitioning the data into many categories.
 
 
-\section{Naive Bayes classifiers}
+\section{{Naive Bayes classifiers}
 \label{sec:NBC}
 Assume the features are \textbf{conditionally independent} given the class label, then the class conditional density has the following form
 \begin{equation}
