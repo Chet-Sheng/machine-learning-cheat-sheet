@@ -1,13 +1,12 @@
 \chapter{Generative models for discrete data}
 
-\section{Generative classifier}
-%\vspace{-20pt}
-%\begin{flalign}
-%	p(y=c|\vec{x},\vec{\theta}) &= \dfrac{p(y=c, \textbf{x}, \theta)/p(\theta)}{\sum_{c'}p( y=c', \textbf{x}, \theta)/p(\theta)}\\
-%	&=\dfrac{{\color{blue}p(y=c|\vec{\theta})p(\vec{x}|y=c,\vec{\theta})}}{\sum_{c'}{p(y=c'|\vec{\theta})p(\vec{x}|y=c',\vec{\theta})}}
-%\end{flalign}
-%
-%This is called a \textbf{generative classifier}, since it specifies {\color{blue} how to generate the data using the \textbf{class conditional density} $p(\vec{x}|y=c)$ and the class prior $p(y=c)$.} An alternative approach is to directly fit the class posterior, $p(y=c|\vec{x})$ ;this is known as a \textbf{discriminative classifier}. 
+{\color{blue}
+\section{Generative classifier}}
+\begin{equation}\label{eqn:Generative-classifier}
+p(y=c|\vec{x},\vec{\theta})=\dfrac{p(y=c|\vec{\theta})p(\vec{x}|y=c,\vec{\theta})}{\sum_{c'}{p(y=c'|\vec{\theta})p(\vec{x}|y=c',\vec{\theta})}}
+\end{equation}
+
+This is called a \textbf{generative classifier}, since it specifies how to {\color{blue}generate the data using the \textbf{class conditional density} $p(\vec{x}|y=c)$ and the \textbf{class prior} $p(y=c)$.} An alternative approach is to directly fit the class posterior, $p(y=c|\vec{x})$ ;this is known as a \textbf{discriminative classifier}. 
 
 
 \section{Bayesian concept learning}
@@ -233,10 +232,59 @@ where $\vec{\theta}_{-j}$ are all the components of \vec{\theta} except $\theta_
 
 The above expression avoids the zero-count problem. In fact, this form of Bayesian smoothing is even more important in the multinomial case than the binary case, since the likelihood of data sparsity increases once we start partitioning the data into many categories.
 
-
-\section{{Naive Bayes classifiers}
+{\color{blue}
+\section{Naive Bayes classifiers}}
 \label{sec:NBC}
-Assume the features are \textbf{conditionally independent} given the class label, then the class conditional density has the following form
+Naive Bayes is a \underline{conditional probability model}: given a problem instance to be classified, represented by a vector \underline{$\vec{x}=( x_1,x_2,...,x_n $) representing some $ n $ features} (\textbf{independent variables}), it assigns to this instance probabilities
+\begin{flalign}
+	p(C_k| x_1, ...,x_n)
+\end{flalign}
+for each of $ k $ possible outcomes or classes $ C_k $.
+
+The problem with the above formulation is that if the number of features n is large or \textbf{if a feature can take on a large number of values}, then basing such a model on \textbf{probability tables is infeasible}. We therefore reformulate the model to make it more tractable. Using Bayes' theorem, the conditional probability can be decomposed as
+\begin{flalign}
+p(C_k| \vec{x})=\dfrac{p(C_k)p(\vec{x}|C_k)}{p(\vec{x})}
+\end{flalign}
+By Bayesian probability terminology, the above equation can be written as
+\begin{flalign}
+	\text{posterior}=\dfrac{\text{prior} \times \text{likelihood}}{\text{Evidence}}
+\end{flalign}
+
+In practice, there is interest only in the numerator of that fraction, because the denominator does not depend on $ C $, and the values of the features $ F_i $ are given, so that the denominator is effectively constant. The \textbf{numerator} is equivalent to the joint probability model
+\begin{flalign}
+	p(C_k, x_1,...,x_n)
+\end{flalign}
+which can be rewritten as follows, using the chain rule for repeated applications of the definition of conditional probability:
+\begin{flalign}
+	&p(C_k, x_1, ...,x_n)=p(x_1,...,x_n, C_k)\\
+	&=p(x_1|x_2,...,x_n, C_k)p(x_2, ...,x_n,C_k)\\
+	&=p(x_1|x_2,...,x_n, C_k)p(x_2|x_3, ...,x_n,C_k)p(x_3, ...,x_n,C_k))\\
+	&=...\\
+	&=p(x_1|x_2,...,x_n,C_k)p(x_2|x_3,...,x_n, C_k)...p(x_{n-1}|x_n, C_k)p(x_n|C_k)p(C_k)
+\end{flalign}
+The naive conditional independence assume that each feature $ F_i $ is conditionally independent of every other feature $ F_j $ for $ j \neq i $, given the category $ C $. This means:\\
+\begin{flalign}
+p(x_i|x_{i+1}, x_n,C_k)=p(x_i|C_k)
+\end{flalign}
+Thus, the joint model can be expressed as
+\begin{flalign}
+	p(C_k|x_1,...,x_n) &\propto p(C_k, x_1,...,x_n)\\
+	&\propto p(C_k)p(x_1|C_k)p(x_2|C_k)p(x_3|C_k)...\\
+	&\propto p(C_k)\prod_{i=1}^{n}p(x_i | C_k).
+\end{flalign}
+Therefore, the conditional distribution over the class variable $ C $ is:
+\begin{flalign}
+p(C_k|x_1, ...,x_n)=\frac{1}{Z} p(C_k)\prod_{i=1}^{n}p(x_i|C_k)
+\end{flalign}
+where the evidence $ Z=p(\vec{x}) $ is a scaling dependent only on $ x_1,...,x_n $, that is a constant if the values of feature variables are known.
+
+The discussion so far has derived the \textbf{independent feature model}, that is, the {\color{blue}\textbf{naive Bayes probability model}}. The \textbf{{\color{blue}naive Bayes classifier}} combines this model with a decision rule (maximum a posteriori or \textbf{MAP} decision rule), is the function that assigns a class lable $ \hat{y}=C_k $ for some $ k $ as follows:
+\begin{flalign}
+	\hat{y}=\argmax_{k\in {1,...,K}} p(C_k) \prod_{i=1}^{n}p(x_i|C_k).
+\end{flalign}
+
+Or in anther form:
+
 \begin{equation}
 p(\vec{x}|y=c,\vec{\theta})=\prod\limits_{j=1}^D p(x_j|y=c,\vec{\theta}_{jc})
 \end{equation}
